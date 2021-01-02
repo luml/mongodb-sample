@@ -1,7 +1,7 @@
-const express = require('express')
-const { MongoClient } = require('mongodb')
+const express = require('express');
+const { MongoClient } = require('mongodb');
 
-const connectionString = "mongodb://localhost:27017";
+const connectionString = process.env.MONGODB_CONNECTION_STRING || "mongodb://localhost:27017";
 
 async function init() {
     const client = new MongoClient(connectionString, {
@@ -27,7 +27,7 @@ async function init() {
         res.json({ status: "ok", pets }).end();
     })
 
-    const PORT = 3000;
+    const PORT = process.env.PORT || 3000;
     app.use(express.static('./static'));
     app.listen(PORT)
 
